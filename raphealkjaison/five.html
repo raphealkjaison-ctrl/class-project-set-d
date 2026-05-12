@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word and Space Counter</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 40%, #0b1224 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .card {
+            width: min(620px, calc(100% - 32px));
+            padding: 36px 32px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.42);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 140px;
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            background: rgba(30, 41, 59, 0.95);
+            color: #f8fafc;
+            font-size: 1rem;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        textarea:focus {
+            border-color: rgba(96, 165, 250, 0.95);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+        }
+
+        button {
+            margin-top: 18px;
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #result {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            color: #f8fafc;
+            line-height: 1.8;
+            font-size: 1rem;
+            min-height: 80px;
+        }
+
+        strong {
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Word and Space Counter</h1>
+        <p>Type a sentence or paragraph, then click the button to see the total word count and total number of spaces.</p>
+
+        <label for="textInput">Your text</label>
+        <textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+        <button id="countBtn">Count Words and Spaces</button>
+
+        <div id="result">Results will appear here after counting.</div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const countBtn = document.getElementById('countBtn');
+        const result = document.getElementById('result');
+
+        function countWordsAndSpaces() {
+            const text = textInput.value;
+            if (!text.trim()) {
+                result.textContent = 'Please enter some text first.';
+                return;
+            }
+
+            const words = text.trim().split(/\s+/).filter(Boolean);
+            const spaces = (text.match(/ /g) || []).length;
+
+            result.innerHTML = `
+                <strong>Word count:</strong> ${words.length}<br />
+                <strong>Space count:</strong> ${spaces}
+            `;
+        }
+
+        countBtn.addEventListener('click', countWordsAndSpaces);
+    </script>
+</body>
+</html>

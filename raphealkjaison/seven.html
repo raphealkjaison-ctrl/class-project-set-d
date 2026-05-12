@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Duplicates from Array</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e3a8a 45%, #020617 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .panel {
+            width: min(640px, calc(100% - 32px));
+            padding: 36px 34px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 140px;
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            background: rgba(30, 41, 59, 0.95);
+            color: #f8fafc;
+            font-size: 1rem;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        textarea:focus {
+            border-color: rgba(96, 165, 250, 0.95);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+        }
+
+        button {
+            margin-top: 18px;
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #result {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            min-height: 100px;
+            color: #f8fafc;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        strong {
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h1>Remove Duplicates from Array</h1>
+        <p>Enter values separated by commas, then click the button to remove duplicates and display the cleaned array.</p>
+
+        <label for="arrayInput">Enter values</label>
+        <textarea id="arrayInput" placeholder="Apple, Banana, Apple, Mango, Banana"></textarea>
+        <button id="removeBtn">Remove Duplicates</button>
+
+        <div id="result">The deduplicated array result will appear here.</div>
+    </div>
+
+    <script>
+        const arrayInput = document.getElementById('arrayInput');
+        const removeBtn = document.getElementById('removeBtn');
+        const result = document.getElementById('result');
+
+        function removeDuplicates() {
+            const rawValue = arrayInput.value.trim();
+            if (!rawValue) {
+                result.textContent = 'Please enter some values first.';
+                return;
+            }
+
+            const items = rawValue
+                .split(',')
+                .map(item => item.trim())
+                .filter(Boolean);
+
+            if (items.length === 0) {
+                result.textContent = 'Please enter valid values separated by commas.';
+                return;
+            }
+
+            const uniqueItems = [...new Set(items)];
+            result.innerHTML = `
+                <strong>Original array:</strong> [${items.map(item => `'${item}'`).join(', ')}]<br />
+                <strong>Unique array:</strong> [${uniqueItems.map(item => `'${item}'`).join(', ')}]
+            `;
+        }
+
+        removeBtn.addEventListener('click', removeDuplicates);
+    </script>
+</body>
+</html>

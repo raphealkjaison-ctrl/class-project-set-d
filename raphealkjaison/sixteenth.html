@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Submitted Data</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 45%, #020617 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .card {
+            width: min(640px, calc(100% - 32px));
+            padding: 36px 32px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .field {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        label {
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            background: rgba(30, 41, 59, 0.95);
+            color: #f8fafc;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus {
+            border-color: rgba(96, 165, 250, 0.95);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+        }
+
+        button {
+            margin-top: 14px;
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #message {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            min-height: 100px;
+            color: #f8fafc;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .success {
+            color: #a7f3d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Display Submitted Data</h1>
+        <p>Fill in the form and submit it to display the submitted values with a success message.</p>
+
+        <div class="field">
+            <label for="nameInput">Name</label>
+            <input id="nameInput" type="text" placeholder="Enter your name" />
+
+            <label for="emailInput">Email</label>
+            <input id="emailInput" type="email" placeholder="Enter your email" />
+
+            <label for="phoneInput">Phone</label>
+            <input id="phoneInput" type="tel" placeholder="Enter your phone number" />
+        </div>
+
+        <button id="submitBtn">Submit</button>
+        <div id="message">The submitted data will appear here after you press Submit.</div>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const emailInput = document.getElementById('emailInput');
+        const phoneInput = document.getElementById('phoneInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const message = document.getElementById('message');
+
+        function submitData() {
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            if (!name || !email || !phone) {
+                message.textContent = 'Please fill out all fields before submitting.';
+                message.className = 'error';
+                return;
+            }
+
+            message.innerHTML = `
+                <strong>Success!</strong> Your data was submitted.<br />
+                <strong>Name:</strong> ${name}<br />
+                <strong>Email:</strong> ${email}<br />
+                <strong>Phone:</strong> ${phone}
+            `;
+            message.className = 'success';
+        }
+
+        submitBtn.addEventListener('click', submitData);
+    </script>
+</body>
+</html>

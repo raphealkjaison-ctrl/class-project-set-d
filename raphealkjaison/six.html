@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Array Demo</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #2563eb 0%, #0f172a 55%, #020617 100%);
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .card {
+            width: min(640px, calc(100% - 32px));
+            padding: 36px 34px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.75;
+        }
+
+        .button-row {
+            display: grid;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        button {
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #result {
+            margin-top: 26px;
+            padding: 20px 22px;
+            border-radius: 20px;
+            background: rgba(148, 163, 184, 0.12);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            min-height: 90px;
+            line-height: 1.7;
+            font-size: 1rem;
+            color: #f8fafc;
+        }
+
+        strong {
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Fruit Array Demo</h1>
+        <p>This example stores an array of fruits and displays the third item when you click the button.</p>
+
+        <div class="button-row">
+            <button id="showBtn">Show Third Fruit</button>
+            <button id="changeBtn">Change Fruit List</button>
+        </div>
+
+        <div id="result">Click the button to reveal the third element in the fruit array.</div>
+    </div>
+
+    <script>
+        const showBtn = document.getElementById('showBtn');
+        const changeBtn = document.getElementById('changeBtn');
+        const result = document.getElementById('result');
+
+        let fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
+
+        function showThirdFruit() {
+            if (fruits.length < 3) {
+                result.innerHTML = '<strong>No third fruit available</strong> because the array has fewer than 3 items.';
+                return;
+            }
+
+            result.innerHTML = `
+                <strong>Fruit array:</strong> ${fruits.join(', ')}<br />
+                <strong>Third fruit:</strong> ${fruits[2]}
+            `;
+        }
+
+        function changeFruitList() {
+            fruits = ['Mango', 'Papaya', 'Kiwi', 'Grapes', 'Pineapple'];
+            result.innerHTML = `
+                <strong>Fruit array updated:</strong> ${fruits.join(', ')}<br />
+                <strong>Third fruit now:</strong> ${fruits[2]}
+            `;
+        }
+
+        showBtn.addEventListener('click', showThirdFruit);
+        changeBtn.addEventListener('click', changeFruitList);
+    </script>
+</body>
+</html>

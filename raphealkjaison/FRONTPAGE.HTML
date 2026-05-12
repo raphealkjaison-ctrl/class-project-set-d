@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #07111f 0%, #131d32 40%, #0c1322 100%);
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.4;
+        }
+
+        body::before {
+            width: 360px;
+            height: 360px;
+            background: rgba(59, 130, 246, 0.25);
+            top: 10%;
+            left: -6%;
+        }
+
+        body::after {
+            width: 520px;
+            height: 520px;
+            background: rgba(168, 85, 247, 0.18);
+            right: -12%;
+            bottom: 10%;
+        }
+
+        .profile-card {
+            position: relative;
+            width: min(960px, calc(100% - 40px));
+            padding: 42px 40px;
+            border-radius: 36px;
+            background: rgba(12, 20, 35, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(18px);
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .header-left {
+            max-width: 620px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(3rem, 4vw, 4.4rem);
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        h2 {
+            margin: 8px 0 0;
+            color: #7dd3fc;
+            font-size: clamp(1.1rem, 1.1vw, 1.5rem);
+            letter-spacing: 0.18em;
+        }
+
+        .contact-grid,
+        .card-grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .contact-grid {
+            margin-top: 30px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .contact-card,
+        .info-card {
+            padding: 24px;
+            border-radius: 24px;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(96, 165, 250, 0.12);
+            color: #f8fafc;
+            line-height: 1.7;
+        }
+
+        .contact-card strong,
+        .info-card strong {
+            display: block;
+            margin-bottom: 12px;
+            color: #38bdf8;
+        }
+
+        .contact-card p,
+        .contact-card span,
+        .info-card p,
+        .info-card li {
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        .section {
+            margin-top: 38px;
+        }
+
+        .section h3 {
+            margin: 0 0 16px;
+            font-size: 1.5rem;
+            color: #f8fafc;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .info-list li {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .info-label {
+            min-width: 120px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .button-row {
+            margin-top: 36px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tasks-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tasks-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.14);
+            color: #7dd3fc;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 14px;
+        }
+
+        @media (max-width: 860px) {
+            .contact-grid,
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .header {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="header">
+            <div class="header-left">
+                <div class="badge">Profile Page</div>
+                <h1>RAPHEAL K JAISON</h1>
+                <h2>Set C</h2>
+                <p class="info">Computer systems engineering student with experience in food delivery operations, supplier relations, and programming training. Ready to demonstrate skills through practical JavaScript projects and web-based applications.</p>
+            </div>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <strong>Contact</strong>
+                <p>Phone: (+371) 29418437</p>
+                <p>Email: raphealjkaison@gmail.com</p>
+            </div>
+            <div class="contact-card">
+                <strong>Location</strong>
+                <p>Slokas iela 28, LV-1048 Riga, Latvia</p>
+                <p>Atrium, LV 1048, RIGA, Latvia</p>
+            </div>
+            <div class="contact-card">
+                <strong>Personal</strong>
+                <p>DOB: 01/03/2005</p>
+                <p>Nationality: Indian</p>
+            </div>
+            <div class="contact-card">
+                <strong>Project</strong>
+                <p>JavaScript Task Collection</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <h3>Work Experience</h3>
+            <div class="card-grid">
+                <div class="info-card">
+                    <strong>Food Delivery - Rapheal</strong>
+                    <time>01/06/2023 → 01/09/2024 | Thrissur</time>
+                    <div class="info-list">
+                        <li><span class="info-label">Role:</span> Delivery Operator</li>
+                        <li><span class="info-label">Highlights:</span> Supplier relations, timely fulfillment, customer service.</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>Education & Training</h3>
+            <div class="card-grid">
+                <div class="info-card">
+                    <strong>Bachelor Degree of Engineering Science in Computer Systems</strong>
+                    <time>03/09/2024 – Current | Riga Technical University</time>
+                    <div class="info-list">
+                        <li><span class="info-label">Level:</span> EQF 6</li>
+                        <li><span class="info-label">Location:</span> Riga, Latvia</li>
+                        <li><span class="info-label">Website:</span> rtu.lv</li>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <strong>Higher Secondary H.S.S Arimpur</strong>
+                    <time>14/10/2021 – 30/03/2023 | Thrissur</time>
+                    <div class="info-list">
+                        <li><span class="info-label">Level:</span> EQF 5</li>
+                        <li><span class="info-label">Location:</span> Thrissur, India</li>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <strong>Secondary School St Joseph's Model HSS Kuriachira</strong>
+                    <time>05/06/2020 – 14/07/2021 | Thrissur</time>
+                    <div class="info-list">
+                        <li><span class="info-label">Level:</span> EQF 4</li>
+                        <li><span class="info-label">Location:</span> Thrissur, India</li>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <strong>Diploma in Basic Programming</strong>
+                    <time>20/05/2023 – 18/11/2023 | Learn Digital Academy</time>
+                    <div class="info-list">
+                        <li><span class="info-label">Location:</span> Thrissur, India</li>
+                        <li><span class="info-label">Website:</span> learndigital.co</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>Skills</h3>
+            <div class="card-grid">
+                <div class="info-card">
+                    <strong>Languages</strong>
+                    <div class="info-list">
+                        <li><span class="info-label">Malayalam</span><span>Native</span></li>
+                        <li><span class="info-label">English</span><span>C1 Listening / C2 Reading / C2 Speaking / C2 Interaction / C1 Writing</span></li>
+                        <li><span class="info-label">Hindi</span><span>B2 Listening / C1 Reading / B2 Speaking / B2 Interaction / C1 Writing</span></li>
+                        <li><span class="info-label">Tamil</span><span>B2 Listening / A1 Reading / B2 Speaking / B2 Interaction / A1 Writing</span></li>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <strong>Digital Skills</strong>
+                    <div class="info-list">
+                        <li><span class="info-label">Tools</span><span>Microsoft Word, Excel, PowerPoint, Google Drive</span></li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="button-row">
+            <a class="tasks-button" href="homepage.html">TASKS</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splice Array Demo</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 45%, #020617 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .panel {
+            width: min(660px, calc(100% - 32px));
+            padding: 36px 32px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .controls {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            background: rgba(30, 41, 59, 0.95);
+            color: #f8fafc;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: rgba(96, 165, 250, 0.95);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #result {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            min-height: 120px;
+            color: #f8fafc;
+            line-height: 1.7;
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+
+        strong {
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h1>Splice Array Demo</h1>
+        <p>This demo removes elements from an array one by one using <code>splice()</code>, then shows the updated array each time.</p>
+
+        <div class="controls">
+            <label for="startIndex">Start index to remove</label>
+            <input id="startIndex" type="number" min="0" placeholder="Enter start index" />
+
+            <label for="deleteCount">Number of elements to delete</label>
+            <input id="deleteCount" type="number" min="0" placeholder="Enter delete count" />
+
+            <button id="removeBtn">Delete Elements One by One</button>
+        </div>
+
+        <div id="result">Initial array: [Apple, Banana, Cherry, Date, Elderberry]</div>
+    </div>
+
+    <script>
+        const startIndexInput = document.getElementById('startIndex');
+        const deleteCountInput = document.getElementById('deleteCount');
+        const removeBtn = document.getElementById('removeBtn');
+        const result = document.getElementById('result');
+
+        const originalArray = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
+
+        function removeElements() {
+            const startIndex = parseInt(startIndexInput.value, 10);
+            const deleteCount = parseInt(deleteCountInput.value, 10);
+            const arrayCopy = [...originalArray];
+
+            if (Number.isNaN(startIndex) || startIndex < 0 || startIndex >= arrayCopy.length) {
+                result.textContent = 'Please enter a valid start index between 0 and ' + (arrayCopy.length - 1) + '.';
+                return;
+            }
+            if (Number.isNaN(deleteCount) || deleteCount < 0) {
+                result.textContent = 'Please enter a valid delete count of 0 or more.';
+                return;
+            }
+
+            let output = 'Original array: [' + arrayCopy.join(', ') + ']\n';
+            let currentIndex = startIndex;
+            let count = deleteCount;
+
+            while (count > 0 && currentIndex < arrayCopy.length) {
+                const removed = arrayCopy.splice(currentIndex, 1);
+                output += `Removed element at index ${currentIndex}: ${removed[0]}\n`;
+                output += 'Current array: [' + arrayCopy.join(', ') + ']\n';
+                count -= 1;
+            }
+
+            if (deleteCount > 0 && startIndex >= arrayCopy.length) {
+                output += 'No more elements to delete from that position.';
+            }
+
+            result.textContent = output.trim();
+        }
+
+        removeBtn.addEventListener('click', removeElements);
+    </script>
+</body>
+</html>

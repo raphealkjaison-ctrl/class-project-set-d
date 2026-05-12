@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Arithmetic Input</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 45%, #020617 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .card {
+            width: min(640px, calc(100% - 32px));
+            padding: 36px 34px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #result {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            min-height: 90px;
+            color: #f8fafc;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        strong {
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Popup Arithmetic Input</h1>
+        <p>Click the button and enter a number or string in the popup to run a simple arithmetic rule.</p>
+
+        <button id="openPopup">Open Popup</button>
+        <div id="result">Result will appear here after input.</div>
+    </div>
+
+    <script>
+        const openPopup = document.getElementById('openPopup');
+        const result = document.getElementById('result');
+
+        function handleInput() {
+            const input = prompt('Enter a number or text:');
+            if (input === null) {
+                result.textContent = 'Popup canceled.';
+                return;
+            }
+
+            if (input.trim() === '') {
+                result.textContent = 'No input provided.';
+                return;
+            }
+
+            const numericValue = Number(input);
+            if (!Number.isNaN(numericValue)) {
+                const calculation = numericValue * 2 + 10;
+                result.innerHTML = `
+                    <strong>Input:</strong> ${numericValue} <br />
+                    <strong>Rule:</strong> multiply by 2 and add 10 <br />
+                    <strong>Result:</strong> ${calculation}
+                `;
+                return;
+            }
+
+            const reversed = input.split('').reverse().join('');
+            result.innerHTML = `
+                <strong>Input:</strong> ${input} <br />
+                <strong>Rule:</strong> reverse the string <br />
+                <strong>Result:</strong> ${reversed}
+            `;
+        }
+
+        openPopup.addEventListener('click', handleInput);
+    </script>
+</body>
+</html>

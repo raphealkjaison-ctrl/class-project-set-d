@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 45%, #020617 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .card {
+            width: min(620px, calc(100% - 32px));
+            padding: 36px 32px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .timer {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-top: 12px;
+            letter-spacing: 0.08em;
+            color: #7dd3fc;
+        }
+
+        .controls {
+            display: grid;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        button {
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        .small-button {
+            width: 100%;
+            max-width: 240px;
+            margin: 0 auto;
+        }
+
+        .status {
+            margin-top: 18px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Countdown Timer</h1>
+        <p>Start the countdown and use pause or reset to control the timer.</p>
+
+        <div class="timer" id="timerDisplay">00:30</div>
+
+        <div class="controls">
+            <button id="startBtn" class="small-button">Start</button>
+            <button id="pauseBtn" class="small-button">Pause</button>
+            <button id="resetBtn" class="small-button">Reset</button>
+        </div>
+
+        <div class="status" id="statusText">Ready to start.</div>
+    </div>
+
+    <script>
+        const timerDisplay = document.getElementById('timerDisplay');
+        const statusText = document.getElementById('statusText');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        let duration = 30;
+        let remaining = duration;
+        let intervalId = null;
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            return `${mins}:${secs}`;
+        }
+
+        function updateDisplay() {
+            timerDisplay.textContent = formatTime(remaining);
+        }
+
+        function startTimer() {
+            if (intervalId !== null) return;
+            statusText.textContent = 'Timer running...';
+            intervalId = setInterval(() => {
+                if (remaining <= 0) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                    statusText.textContent = 'Timer finished.';
+                    return;
+                }
+                remaining -= 1;
+                updateDisplay();
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (intervalId !== null) {
+                clearInterval(intervalId);
+                intervalId = null;
+                statusText.textContent = 'Timer paused.';
+            }
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            remaining = duration;
+            updateDisplay();
+            statusText.textContent = 'Timer reset.';
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        updateDisplay();
+    </script>
+</body>
+</html>

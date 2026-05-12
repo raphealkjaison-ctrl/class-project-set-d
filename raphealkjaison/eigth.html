@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Last Element</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e3a8a 40%, #020617 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .container {
+            width: min(640px, calc(100% - 32px));
+            padding: 36px 34px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.75;
+        }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #result {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            color: #f8fafc;
+            min-height: 90px;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        strong {
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Find Last Element from Array</h1>
+        <p>Click the button to display the last item from a predefined array in a styled popup-like result panel.</p>
+
+        <button id="showBtn">Show Last Element</button>
+        <div id="result">Click the button to see the last element from the array.</div>
+    </div>
+
+    <script>
+        const showBtn = document.getElementById('showBtn');
+        const result = document.getElementById('result');
+
+        const items = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
+
+        showBtn.addEventListener('click', () => {
+            const lastItem = items[items.length - 1];
+            result.innerHTML = `
+                <strong>Array items:</strong> ${items.join(', ')}<br />
+                <strong>Last element:</strong> ${lastItem}
+            `;
+        });
+    </script>
+</body>
+</html>

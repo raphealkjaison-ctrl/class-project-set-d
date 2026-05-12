@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Clears Output</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 45%, #020617 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .card {
+            width: min(620px, calc(100% - 32px));
+            padding: 36px 32px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .field {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        label {
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            background: rgba(30, 41, 59, 0.95);
+            color: #f8fafc;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: rgba(96, 165, 250, 0.95);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        button {
+            flex: 1 1 160px;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(56, 189, 248, 0.28);
+        }
+
+        #result {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            min-height: 120px;
+            color: #f8fafc;
+            line-height: 1.7;
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Reset Clears Output</h1>
+        <p>Type text below, submit it to show the output, then click Reset to clear everything.</p>
+
+        <div class="field">
+            <label for="textInput">Your task text</label>
+            <textarea id="textInput" rows="4" placeholder="Write something here..."></textarea>
+        </div>
+
+        <div class="buttons">
+            <button id="submitBtn">Submit</button>
+            <button id="resetBtn" style="background: linear-gradient(135deg, #f97316, #ef4444);">Reset</button>
+        </div>
+
+        <div id="result">Output will appear here after submit.</div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const result = document.getElementById('result');
+
+        submitBtn.addEventListener('click', () => {
+            const value = textInput.value.trim();
+            if (!value) {
+                result.textContent = 'Please enter some text before submitting.';
+                return;
+            }
+            result.textContent = `Submitted output:\n${value}`;
+        });
+
+        resetBtn.addEventListener('click', () => {
+            textInput.value = '';
+            result.textContent = 'Output cleared.';
+        });
+    </script>
+</body>
+</html>
